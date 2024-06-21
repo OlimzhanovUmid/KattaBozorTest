@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.material3.pulltorefresh.pullToRefresh
-import androidx.compose.material3.pulltorefresh.pullToRefreshIndicator
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,16 +22,20 @@ import com.uolimzhanov.kattabozortest.model.entity.Attribute
 import com.uolimzhanov.kattabozortest.model.entity.Image
 import com.uolimzhanov.kattabozortest.model.entity.Offer
 import com.uolimzhanov.kattabozortest.ui.generic.OfferItem
+import com.uolimzhanov.kattabozortest.ui.navgraphs.Screens
 import com.uolimzhanov.kattabozortest.ui.theme.KattaBozorTestTheme
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.encodeToJsonElement
+import org.koin.androidx.compose.koinViewModel
 
 /**
  * Created by uolimzhanov on 20.06.2024
  */
 @Composable
-fun OfficeScreenRoot(
+fun OffersScreenRoot(
     modifier: Modifier = Modifier,
     navController: NavController,
-    viewModel: OffersViewModel
+    viewModel: OffersViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     OffersScreen(
@@ -40,8 +43,10 @@ fun OfficeScreenRoot(
         offers = state.offers,
         onRefresh = viewModel::onGetOffers,
         isLoading = state.isLoading,
-        onOfferClick = {
-
+        onOfferClick = { offer ->
+      /*      navController.navigate(Screens.Product(
+                offer = Json.encodeToJsonElement(offer).toString()
+            ))*/
         }
     )
 }
