@@ -60,9 +60,9 @@ dependencies {
     implementation(libs.bundles.compose)
     implementation(libs.bundles.koin)
     implementation(libs.bundles.retrofit)
+    implementation(libs.bundles.coil)
 
     implementation(libs.timber)
-    implementation(libs.coil)
 
     debugImplementation(libs.compose.ui.tooling)
     androidTestImplementation(libs.bundles.test)

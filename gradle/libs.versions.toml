@@ -53,6 +53,7 @@ okhttp3 = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 okhttp3-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
 
 coil = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil3-network = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 junit = { module = "androidx.test.ext:junit-ktx", version.ref = "junit" }
 test-runner = { module = "androidx.test:runner", version.ref = "test-runner" }
@@ -64,6 +65,10 @@ compose = [
     "compose-ui-util",
     "compose-material-navigation",
     "compose-material3",
+]
+coil = [
+    "coil",
+    "coil3-network"
 ]
 koin = [
     "koin-core",
