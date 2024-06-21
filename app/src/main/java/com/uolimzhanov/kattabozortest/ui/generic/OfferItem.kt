@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -38,27 +39,14 @@ fun OfferItem(
 ) {
     Card(
         modifier = modifier
-            .aspectRatio(3f/4)
+            .aspectRatio(3f / 4)
             .clickable {
                 onClick(offer)
             },
     ) {
-        SubcomposeAsyncImage(
-            model = offer.image?.url,
-            contentScale = ContentScale.FillBounds,
-            contentDescription = null,
-            error = {
-                Box(
-                    modifier = Modifier.fillMaxSize(0.75f),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.empty_basket),
-                        contentDescription = null
-                    )
-                }
-            },
-            modifier = Modifier.weight(5f)
+        OfferItemImage(
+            modifier = Modifier.fillMaxWidth().weight(3f),
+            imageUrl = offer.image?.url
         )
         ListItem(
             overlineContent = {
@@ -82,7 +70,7 @@ fun OfferItem(
                     overflow = TextOverflow.Ellipsis
                 )
             },
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.weight(1.5f),
             colors = ListItemDefaults.colors(
                 containerColor = CardDefaults.cardColors().containerColor
             )
@@ -98,26 +86,6 @@ private fun StoreItemPreview() {
             modifier = Modifier
                 .fillMaxSize()
         ){
-            Row {
-                OfferItem(
-                    modifier = Modifier,
-                    offer = Offer(
-                        name = "Google pixel 5",
-                        brand = "Google",
-                        merchant = "Ali",
-                        attributes = listOf(
-                            Attribute(
-                                name = "ram",
-                                value = "8gb"
-                            )
-                        ),
-                        image = Image(
-                            width = 154,
-                            height = 124,
-                            url = null
-                        )
-                    )
-                )
                 OfferItem(
                     modifier = Modifier,
                     offer = Offer(
@@ -138,7 +106,6 @@ private fun StoreItemPreview() {
                     )
                 )
 
-            }
         }
     }
 }
