@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.bundles.coil)
 
     implementation(libs.timber)
+    implementation(libs.androidx.startup.runtime)
 
     debugImplementation(libs.compose.ui.tooling)
     androidTestImplementation(libs.bundles.test)

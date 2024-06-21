@@ -19,6 +19,7 @@ timber = "5.0.1"
 coil = "3.0.0-alpha06"
 junit = "1.2.0-rc01"
 test-runner = "1.6.0-rc01"
+startup-runtime = "1.1.1"
 
 [plugins]
 android-app = { id = "com.android.application", version.ref = "agp" }
@@ -33,6 +34,7 @@ androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-cor
 androidx-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 androidx-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
+androidx-startup-runtime = { group = "androidx.startup", name = "startup-runtime", version.ref = "startup-runtime" }
 kotlinx-serializer-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serializer-json" }
 kotlinx-serializer-json-okio = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json-okio", version.ref = "kotlinx-serializer-json" }
 
