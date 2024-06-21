@@ -9,6 +9,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.okio.decodeFromBufferedSource
+import timber.log.Timber
 
 /**
  * Created by uolimzhanov on 20.06.2024
@@ -22,9 +23,9 @@ class OffersRepositoryImpl(
         api.getOffers().source().use { source ->
             // Для избежания создания лишнего дата класса
             val response = Json.decodeFromBufferedSource(JsonElement.serializer(), source)
-                .jsonObject["response"]!!.jsonObject
-
-            val offersArray = response["offers"]!!.jsonArray
+                .jsonObject["offers"]
+            Timber.tag("response").d(response.toString())
+            val offersArray = response!!.jsonArray
             return Json.decodeFromJsonElement(ListSerializer(Offer.serializer()), offersArray)
         }
     }
