@@ -13,6 +13,7 @@ import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -22,10 +23,7 @@ import com.uolimzhanov.kattabozortest.model.entity.Attribute
 import com.uolimzhanov.kattabozortest.model.entity.Image
 import com.uolimzhanov.kattabozortest.model.entity.Offer
 import com.uolimzhanov.kattabozortest.ui.generic.OfferItem
-import com.uolimzhanov.kattabozortest.ui.navgraphs.Screens
 import com.uolimzhanov.kattabozortest.ui.theme.KattaBozorTestTheme
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.encodeToJsonElement
 import org.koin.androidx.compose.koinViewModel
 
 /**
@@ -50,6 +48,7 @@ fun OffersScreenRoot(
         }
     )
 }
+typealias Id = Int
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,6 +58,8 @@ private fun OffersScreen(
     onOfferClick: (Offer) -> Unit = {},
     onRefresh: () -> Unit = {},
     isLoading: Boolean = false,
+    isSent: Boolean = false,
+    onSend: (Boolean) -> Unit = {}
 ) {
     val pullRefreshState = rememberPullToRefreshState()
     val lazyGridState = rememberLazyGridState()
@@ -68,7 +69,9 @@ private fun OffersScreen(
             pullRefreshState.animateToHidden()
         }
     }
-
+    var sentIds = remember {
+        mutableSetOf<Id>()
+    }
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         state = lazyGridState,
@@ -84,7 +87,9 @@ private fun OffersScreen(
                 modifier = Modifier
                     .padding(2.dp),
                 offer = offer,
-                onClick = onOfferClick
+                onClick = onOfferClick,
+                isSent = isSent,
+                onSend = onSend
             )
         }
     }

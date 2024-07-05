@@ -15,6 +15,7 @@ import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -27,6 +28,7 @@ import com.uolimzhanov.kattabozortest.model.entity.Attribute
 import com.uolimzhanov.kattabozortest.model.entity.Image
 import com.uolimzhanov.kattabozortest.model.entity.Offer
 import com.uolimzhanov.kattabozortest.ui.theme.KattaBozorTestTheme
+import timber.log.Timber
 
 /**
  * Created by uolimzhanov on 20.06.2024
@@ -35,8 +37,14 @@ import com.uolimzhanov.kattabozortest.ui.theme.KattaBozorTestTheme
 fun OfferItem(
     modifier: Modifier = Modifier,
     offer: Offer = Offer(),
-    onClick: (Offer) -> Unit = {}
+    onClick: (Offer) -> Unit = {},
+    isSent: Boolean = false,
+    onSend: (Boolean) -> Unit = {}
 ) {
+    LaunchedEffect(key1 = Unit, key2 = isSent) {
+        println("Hey, I have compositioned! ${offer.id}")
+        onSend(true)
+    }
     Card(
         modifier = modifier
             .aspectRatio(3f / 4)
@@ -45,7 +53,9 @@ fun OfferItem(
             },
     ) {
         OfferItemImage(
-            modifier = Modifier.fillMaxWidth().weight(3f),
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(3f),
             imageUrl = offer.image?.url
         )
         ListItem(
